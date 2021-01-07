@@ -1,16 +1,25 @@
-from homework.models import Student
+from homework.models import Assignment, Student
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import View
+from django.views.generic import View, ListView
 
 # Create your views here.
 
 
-def index(request):
-    return render(request, 'homework/index.html')
+class IndexView(ListView):
+    model = Assignment
+    context_object_name = 'assignments'
+    template_name = 'homework/index.html'
+
+    def get_queryset(self):
+        queryset = {
+            'active_assignments': Assignment.objects.filter(is_active=True).order_by('-deadline'),
+            'inactive_assignments': Assignment.objects.filter(is_active=False).order_by('-deadline')
+        }
+        return queryset
 
 
 class LoginView(View):
