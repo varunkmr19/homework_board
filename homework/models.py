@@ -25,6 +25,7 @@ class Assignment(models.Model):
     deadline = models.DateTimeField()
     description = models.CharField(max_length=1000)
     penalties = models.CharField(max_length=500)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.subject.title} - {self.title}'
