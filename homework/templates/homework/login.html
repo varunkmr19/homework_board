@@ -6,8 +6,8 @@ Homework Board | Login
 
 {% block body %}
 <div class="vh-100 d-flex flex-column justify-content-center align-items-center">
-  <form class="shadow-lg p-3 mb-5 bg-white rounded" method="POST" action="{% url 'login' %}">
-    {csrf_token}
+  <form class="shadow-lg p-3 mb-5 bg-white rounded" method="POST" action="{% url 'login_view' %}">
+    {% csrf_token %}
     <div class="row p-2">
       <label for="username" class="col-form-label">Username</label>
       <div class="col-sm-12">

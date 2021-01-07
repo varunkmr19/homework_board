@@ -7,7 +7,7 @@ Homework Board | Login
 {% block body %}
 <div class="container">
   <form class="row g-3 mt-3 shadow-lg p-3 mb-5 bg-white rounded" method="POST" action="{% url 'register' %}">
-    {csrf_token}
+    {% csrf_token %}
     <div class="col-md-6">
       <label for="first_name" class="form-label">First Name</label>
       <input type="text" class="form-control" id="first_name" name="first_name">
