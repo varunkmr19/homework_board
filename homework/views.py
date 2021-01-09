@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView
 
 # Create your views here.
 
@@ -82,3 +82,7 @@ class RegistrationView(View):
 
     def get(self, request):
         return render(request, 'homework/register.html')
+
+
+class AssignmentDetailView(DetailView):
+    model = Assignment

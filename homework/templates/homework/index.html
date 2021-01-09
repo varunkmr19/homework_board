@@ -20,7 +20,7 @@ Homework Board | Home
         {% if assignments.active_assignments %}
         {% for assignment in assignments.active_assignments %}
         <tr>
-          <td>{{ assignment.title }}</td>
+          <td><a href="{% url 'assignment-detail' assignment.pk %}">{{ assignment.title }}</a></td>
           <td>{{ assignment.subject }}</td>
           <td>{{ assignment.deadline }}</td>
         </tr>
