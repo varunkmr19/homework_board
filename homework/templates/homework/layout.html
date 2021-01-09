@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Assignments</a>
-          <a class="nav-link" href="#">Leaderboard</a>
+          <a class="nav-link" href="{% url 'leaderboard_list' %}">Leaderboard</a>
           {% if user.is_authenticated %}
           <a class="nav-link" href="{% url 'submission_list' %}">Submissions</a>
           <a class="nav-link" href="#">{{ user.last_name }}</a>

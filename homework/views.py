@@ -101,6 +101,16 @@ class SubmissionView(ListView):
         return q
 
 
+class LeaderboardView(ListView):
+    context_object_name = 'leaderboard'
+    template_name = 'homework/leaderboard.html'
+
+    def get_queryset(self):
+        q = Submission.objects.order_by(
+            '-grade')[:9]
+        return q
+
+
 @login_required
 def AssignmentSubmission(request, assignment_id):
     if request.method == 'POST':
