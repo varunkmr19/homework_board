@@ -37,8 +37,8 @@ class Submission(models.Model):
         Student, on_delete=models.CASCADE, related_name="submission")
     solution = models.CharField(max_length=1000)
     date_of_submission = models.DateTimeField(auto_now_add=True, blank=True)
-    grade = models.IntegerField()
-    remarks = models.CharField(max_length=250)
+    grade = models.IntegerField(null=True, blank=True)
+    remarks = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return f'{ self.student.last_name } - { self.assignment.title }'

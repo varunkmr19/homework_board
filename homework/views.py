@@ -1,4 +1,7 @@
-from homework.models import Assignment, Student
+from django.contrib.auth.decorators import login_required
+from django.http.response import Http404
+from datetime import datetime
+from homework.models import Assignment, Student, Submission
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -86,3 +89,27 @@ class RegistrationView(View):
 
 class AssignmentDetailView(DetailView):
     model = Assignment
+
+
+@login_required
+def AssignmentSubmission(request, assignment_id):
+    if request.method == 'POST':
+        try:
+            assignment = Assignment.objects.get(pk=assignment_id)
+        except Assignment.DoesNotExist:
+            raise Http404('Assignment does not exist.')
+
+        student = request.user
+        solution = request.POST['answer']
+        date_of_submission = datetime.now()
+
+        sub = Submission.objects.create(
+            assignment=assignment,
+            student=student,
+            solution=solution,
+            date_of_submission=date_of_submission,
+            grade=None,
+            remarks=None
+        )
+        sub.save()
+        return HttpResponseRedirect(reverse('index'))
