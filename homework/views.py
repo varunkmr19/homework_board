@@ -91,6 +91,16 @@ class AssignmentDetailView(DetailView):
     model = Assignment
 
 
+class SubmissionView(ListView):
+    context_object_name = 'submissions'
+    template_name = 'submission_list.html'
+
+    def get_queryset(self):
+        q = Submission.objects.filter(
+            student=self.request.user).order_by('-date_of_submission')
+        return q
+
+
 @login_required
 def AssignmentSubmission(request, assignment_id):
     if request.method == 'POST':
